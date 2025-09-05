@@ -1,3 +1,5 @@
+// CASE 1 : IF Linked list is empty .
+
 #include <iostream>
 using namespace std;
 
@@ -15,54 +17,46 @@ class Node{
 class List{
     Node* head;
     Node* tail;
-    
+
     public:
     List(){
         head = tail = NULL;
     }
-    
 
-    void push_back(int val){
+    void push_front(int val){
         Node* newnode = new Node(val);
-
-        if(head = NULL){
+        if(head == NULL){
             head = tail = newnode;
             return;
         }else{
-            tail->next = newnode;
-            tail = newnode;
+            newnode->next = head;
+            head = newnode;
         }
     }
 
-
-    void pop_front(){
-        if(head = NULL){
-            cout << "LL is empty !";
+    void insert(int val, int pos){
+        if(pos < 0){
+            cout << "Invalid position";
             return;
-        }else{
-            Node* temp = head;
-            head = head->next;
-            temp->next = NULL;
-
-            delete temp;
         }
-    }
 
-
-    void pop_back(){
-        if(head == NULL){
-            cout << "LL is empty !";
+        if(pos == 0){
+            push_front(val);
             return;
-        }else{
-            Node* temp = head;
-            while(temp->next != tail){
-                temp = temp->next;;
+        }
+
+        Node* temp = head;
+        for(int i = 0; i<pos-1;i++){
+            if(temp == NULL){
+                cout<<"Invalid pos";
+                return;
             }
-            
-            temp ->next = NULL;
-            delete tail;
-            tail = temp;
+            temp = temp->next;
         }
+
+        Node* newnode = new Node(val);
+        newnode->next = temp->next;
+        temp->next = newnode;
     }
 
     void printLL(){
@@ -81,10 +75,9 @@ int main(){
     l1.push_front(1);
     l1.push_front(2);
 
-    l1.push_back(3);
-    l1.push_back(4);
-    l1.push_back(5);
-    
-    l1.pop_front();
+    l1.insert(3,2);
     l1.printLL();
 }
+
+
+
