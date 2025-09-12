@@ -34,6 +34,19 @@ class CircularList{
 
     }
 
+    void add_tail(int val){
+        Node* newnode = new Node(val);
+        if(head == NULL){
+            head = tail = newnode;
+            tail->next = newnode ;
+            return;
+        }else{
+            tail->next = newnode;
+            tail = newnode;
+            tail->next = head;
+        }
+    }
+
     void print(){
         if(head == NULL){
             return;
@@ -59,6 +72,9 @@ int main(){
     cll.add_front(1);
     cll.add_front(2);
     cll.add_front(3);
+
+    cll.add_tail(4);
+    cll.add_tail(5);
 
     cll.print();
 
